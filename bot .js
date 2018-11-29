@@ -121,27 +121,7 @@ return;
 });
 
 
-      client.on('message', async message => {
-  if(message.content.startsWith(prefix + "voice")) {
-  if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply(':x: **ليس لديك الصلاحيات الكافية**');
-  if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply(':x: **ليس معي الصلاحيات الكافية**');
-  var args = message.content.split(' ').slice(1).join(' ');
-  if(args && !args.includes(0)) return message.channel.send(':negative_squared_cross_mark: » فشل اعداد الروم الصوتي .. __يجب عليك كتابة 0 في اسم الروم__');
-  if(!args) args = `VoiceOnline: [ ${message.guild.members.filter(s => s.voiceChannel).size} ]`;
-  message.channel.send(':white_check_mark: » تم عمل الروم الصوتي بنجاح');
-  message.guild.createChannel(`${args.replace(0, message.guild.members.filter(s => s.voiceChannel).size)}`, 'voice').then(c => {
-    c.overwritePermissions(message.guild.id, {
-      CONNECT: false,
-      SPEAK: false
-    });
-    setInterval(() => {
-      c.setName(`${args.replace(0, message.guild.members.filter(s => s.voiceChannel).size)}`).catch(err => {
-        if(err) return;
-      });
-    },3000);
-  });
-  }
-});
+
  
 const devs = ['487727064192122880' , '' , '' , ''];
 const adminprefix = "*";
@@ -414,48 +394,9 @@ const secreT = [
 
 
 
-client.on('message', msg => {
-  if (msg.content === 'السلام عليكم') {
-    msg.reply('```وعليكم السلام ورحمه الله وبركاته```');
-  }
-});
 
 
-client.on('message', msg => {
-  if (msg.content === 'باك') {
-    msg.reply('```ولكم حياك الله```');
-  }
-});
 
-client.on('message', (message) => {
-    if (message.content.startsWith('ban ')) {
-      if(!message.member.hasPermission('BAN_MEMBERS')) return message.reply('هذا الخاصية للدارة فقط');
-        var member= message.mentions.members.first();
-        member.ban().then((member) => {
-         message.channel.send(member.displayName + 'تم طرد هذا الشخص من السيرفر');
-        }).catch(() => {
-            message.channel.send('Error :_:');
-        });
-    }
-});
- 
- client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("Simo"));
-    });
-	client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("simo"));
-    });
- 
-  client.on('message', (message) => {
-    if (message.content.startsWith('kick')) {
-        var member= message.mentions.members.first();
-        member.kick().then((member) => {
-            message.channel.send(member.displayName + ' تم طرد هذا الشخص من السيرفر');
-        }).catch(() => {
-            message.channel.send(":x:");
-        });
-    }
-}); 
 
 
 
@@ -472,5 +413,9 @@ client.on('guildMemberAdd', member => {
     logChannel.send(`Invited by: <@${inviter.id}>`);
   });
 });
+
+
+
+
 
 client.login(process.env.BOT_TOKEN);
